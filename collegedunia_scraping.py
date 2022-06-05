@@ -73,16 +73,16 @@ def get_response_from_college(college_url):
         rank_info = 'Rank data not available'
         fee_info = 'Fee details not found'
     
-    details = [name, location, estd, approved_by, rank_info, fee_info]
+    details = [name, location, estd, approved_by, rank_info, fee_info, first_photo]
     return details;
 
 with open("colleges.csv", "w", encoding='UTF8') as csv_file:
-    titles = ["Name", "Location", "Estd.", "Approved By", "Rank", "Courses and Fees"]
+    titles = ["Name", "Location", "Estd.", "Approved By", "Rank", "Courses and Fees", "Photo"]
     writer = csv.writer(csv_file)
 
     writer.writerow(titles)
     last_page_number = 1852
-    for page in range(1, last_page_number + 1):
+    for page in range(1, 5):
         # to deal with rate limiting (doesn't work rn)
         if (page % 30 == 29):
             time.sleep(300)
