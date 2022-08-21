@@ -4,6 +4,8 @@ A web scraper for the popular [Collegedunia](https://collegedunia.com/) website 
 It scrapes:
 - Name
 - Type of college (Engineering, Medical, Arts, Architecture, Management, Law, etc.)
+- Affiliated university
+- Approved by (UGC, AICTE, DCI, MCI, ICAR, etc.)
 - City and State
 - Address
 - Year of establishment
