@@ -43,7 +43,6 @@ def get_response_from_page(page_url):
 
 def get_response_from_college(college_url):
     college_response = requests.get(college_url, headers=headers) 
-# print(f'Response code: {college_response.status_code}')
     college = college_response.json()
     
     try:
@@ -151,6 +150,7 @@ def get_response_from_college(college_url):
 
 flag = 0;
 
+# Use NordVPN to deal with API rate-limiting
 def switch_ip():
     global flag
     try:
@@ -163,17 +163,19 @@ def switch_ip():
     except Exception:
         print("sorry, vpn can't connect")
 
+# Write data to CSV file
 with open("colleges.csv", "a", encoding='UTF8') as csv_file:
     titles = ["Name", "Category", "Address", "City", "State", "Estd", "Approved By", "Affiliated University", "Rank", "Courses and Fees", "Email", "Phone Number", "Photo", "Brochure"]
     writer = csv.writer(csv_file)
 
+    # Add headers
     writer.writerow(titles)
     last_page_number = 1852
     start = 1
     for page in range(start, last_page_number + 1):
+        # Switch IP just before hitting rate limit
         if (page-start) % 30 == 29:
-            # switch_ip()
-            time.sleep(360)
+            switch_ip()
         page_url = get_api_endpoint_of_page(page)
         get_response_from_page(page_url)
 
